@@ -50,3 +50,51 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
     </body>
   </html>
 `;
+
+export const WELCOME_EMAIL_TEMPLATE = `
+  <html>
+    <head>
+      <style>
+        .email-container {
+          font-family: Arial, sans-serif;
+          color: #333;
+          padding: 20px;
+          background-color: #f4f4f4;
+          border-radius: 10px;
+          text-align: center;
+        }
+        .email-header {
+          background-color: #007bff;
+          color: white;
+          padding: 10px;
+          font-size: 24px;
+          border-radius: 10px 10px 0 0;
+        }
+        .email-body {
+          margin: 20px 0;
+          font-size: 18px;
+        }
+        .email-footer {
+          font-size: 14px;
+          color: #666;
+          margin-top: 20px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="email-container">
+        <div class="email-header">
+          Welcome to Our Platform!
+        </div>
+        <div class="email-body">
+          <p>Hi {{name}},</p>
+          <p>Thank you for joining us!</p>
+          <p>We are excited to have you on board. Explore our features and let us know if you have any questions.</p>
+        </div>
+        <div class="email-footer">
+          <p>If you have any issues, feel free to reach out to our support team.</p>
+        </div>
+      </div>
+    </body>
+  </html>
+`;
