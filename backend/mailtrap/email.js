@@ -2,6 +2,7 @@ import { MailtrapClient } from "mailtrap";
 import {
   VERIFICATION_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
+  PASSWORD_RESET_REQUEST_TEMPLATE,
 } from "./emailTemplates.js";
 import dotenv from "dotenv";
 
@@ -60,5 +61,22 @@ export const sendWelcomeEmail = async (email, name) => {
   } catch (error) {
     console.error("Error sending welcome email:", error);
     throw new Error(`Error sending welcome email: ${error}`);
+  }
+};
+
+export const sendResetPasswordEmail = async (email, resetURL) => {
+  const recipients = [{ email }];
+
+  try {
+    const response = await client.send({
+      from: sender,
+      to: recipients,
+      subject: "Reset Your Password",
+      html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetURL),
+      category: "reset password",
+    });
+  } catch (error) {
+    console.error("Error sending reset password email:", error);
+    throw new Error(`Error sending reset password email: ${error}`);
   }
 };
