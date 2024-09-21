@@ -3,6 +3,7 @@ import {
   VERIFICATION_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
   PASSWORD_RESET_REQUEST_TEMPLATE,
+  PASSWORD_RESET_SUCCESS_TEMPLATE,
 } from "./emailTemplates.js";
 import dotenv from "dotenv";
 
@@ -75,8 +76,30 @@ export const sendResetPasswordEmail = async (email, resetURL) => {
       html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetURL),
       category: "reset password",
     });
+
+    console.log("password reset email sent successfully", response);
+    console.log("password reset URL", resetURL);
   } catch (error) {
     console.error("Error sending reset password email:", error);
     throw new Error(`Error sending reset password email: ${error}`);
+  }
+};
+
+export const sendResetSuccessEmail = async (email) => {
+  const recipients = [{ email }];
+
+  try {
+    const response = await client.send({
+      from: sender,
+      to: recipients,
+      subject: "Reset Your Password successfull",
+      html: PASSWORD_RESET_SUCCESS_TEMPLATE,
+      category: "reset password",
+    });
+
+    console.log("password reset success email sent successfully", response);
+  } catch (error) {
+    console.error("Error sending reset password success email:", error);
+    throw new Error(`Error sending reset password success email: ${error}`);
   }
 };
